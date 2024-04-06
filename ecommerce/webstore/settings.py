@@ -38,6 +38,8 @@ INSTALLED_APPS = [
 
     'store',  # django app
     'cart',
+    'mathfilters',
+    
 ]
 
 MIDDLEWARE = [
