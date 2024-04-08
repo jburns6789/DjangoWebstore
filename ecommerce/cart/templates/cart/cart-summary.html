@@ -1,5 +1,8 @@
 {% include "store/base.html" %}
+
+{% load mathfilters %}
 {% load static %}
+
 {% block content %}
 
 <main class="pt-5">
@@ -27,7 +30,7 @@
             <div class="col border-bottom">
                 <div class="row p-3">
                 <div class="col-6"> Product </div>
-                <div class="col-6 text-end"><span class="h6 fw-bold">$ {{product.price}}<!-- Product price --> </span></div>
+                <div class="col-6 text-end"><span class="h6 fw-bold">$ {{product.price|mul:item.qty}}<!-- Product price --> </span></div>
               </div>
             </div>
             <div class="col">
