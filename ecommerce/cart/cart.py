@@ -15,6 +15,7 @@ class Cart():
             cart = self.session['session_key'] = {}
 
         self.cart = cart
+        
 
     def add(self, product, product_qty):
         product_id = str(product.id)
@@ -26,6 +27,28 @@ class Cart():
             self.cart[product_id] = {'price' : str(product.price), 'qty' : product_qty}
 
         self.session.modified = True
+
+
+    def delete(self, product):
+        product_id = str(product)
+        
+        if product_id in self.cart:
+            del self.cart[product_id]
+
+
+        self.session.modified = True
+
+
+    def update(self, product, qty):
+
+        product_id = str(product)
+        product_quantity = qty
+
+        if product_id in self.cart:
+            self.cart[product_id]['qty'] = product_quantity
+
+        self.session.modified = True
+
 
  
     def __len__(self):
