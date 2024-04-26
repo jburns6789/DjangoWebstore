@@ -11,7 +11,6 @@ def cart_summary(request):
     cart = Cart(request)
 
 
-
     return render(request, 'cart/cart-summary.html', {'cart':cart})
 
 
@@ -32,6 +31,7 @@ def cart_add(request):
         response = JsonResponse({'qty': cart_quantity})
 
         return response
+    
 
 def cart_delete(request):
     
