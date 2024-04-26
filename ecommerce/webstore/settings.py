@@ -10,19 +10,32 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import environ
+import os
+
 from pathlib import Path
+
+env = environ.Env(
+     DEBUG=(bool, False)
+
+)
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = secret_key = 'django-insecure-5vvu7$vo&oslhb35s9_m%qhlx9&jrkc*vy--s-g3u_bk(3j8d9'
+SECRET_KEY = secret_key = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -142,3 +155,5 @@ EMAIL_PORT = '587'
 EMAIL_USE_TLS = 'True'
 
 
+EMAIL_HOST_USER = env('EMAIL_HOST_USER') #admin email
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
