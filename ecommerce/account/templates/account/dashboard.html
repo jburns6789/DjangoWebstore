@@ -1,0 +1,58 @@
+{% include "store/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<body>
+
+    <br>
+
+    <div class="container bg-blue shadow-md p-5 form-layout">
+
+        <h2> Welcome! {{user}} </h2>
+
+        <hr>
+
+        <p> This is the dashboard. Complete the following: </p>
+        <li>Track Orders</li>
+        <li>Manage Account</li>
+        <li>Logout</li>
+
+
+    </div>
+
+    <div class="container bg-blue shadow-md p-5 form-layout">
+
+        <h2> Order Tracking </h2>
+
+        <a class="btn btn-alert navbar-btn text-white" type="button"  href="/"> Track Orders Here </a>
+                                
+    </div>
+
+    <div class="container bg-blue shadow-md p-5 form-layout">
+
+        <h2>Profile Management</h2>
+
+        <a class="btn btn-alert navbar-btn text-white danger" type="button"  href="{% url 'profile-management'%}"> Manage Account Here </a>
+                                
+    </div>
+
+    <div class="container bg-blue shadow-md p-5 form-layout">
+
+        <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'user-logout'%}"> Logout </a>
+                                
+    </div>
+
+
+
+</body>
+
+
+{% endblock %}
+
+
+    
+
+
+
