@@ -8,7 +8,7 @@
 
     <br>
 
-    <div class="container bg-blue shadow-md p-5 form-layout">
+    <div class="container bg-blue shadow-md p-5 form-layout col text-center">
 
         <h2> Welcome! {{user}} </h2>
 
@@ -19,28 +19,35 @@
         <li>Manage Account</li>
         <li>Logout</li>
 
-
     </div>
 
-    <div class="container bg-blue shadow-md p-5 form-layout">
+    <div class="container bg-blue shadow-md p-5 form-layout col text-center">
 
         <h2> Order Tracking </h2>
 
-        <a class="btn btn-alert navbar-btn text-white" type="button"  href="/"> Track Orders Here </a>
+        <hr>
+
+        <p> Track all of your orders here... </p>
+
+        <a class="btn btn-info navbar-btn text-white" type="button"  href="/"> My Orders </a>
                                 
     </div>
 
-    <div class="container bg-blue shadow-md p-5 form-layout">
+    <div class="container bg-blue shadow-md p-5 form-layout col text-center">
 
         <h2>Profile Management</h2>
 
-        <a class="btn btn-alert navbar-btn text-white danger" type="button"  href="{% url 'profile-management'%}"> Manage Account Here </a>
+        <hr>
+
+        <p> Update or delete your account </p>
+
+        <a class="btn btn-info navbar-btn text-white" type="button"  href="{% url 'profile-management'%}"> Manage Account Here </a>
                                 
     </div>
 
-    <div class="container bg-blue shadow-md p-5 form-layout">
+    <div class="container bg-blue shadow-md p-5 form-layout col text-center">
 
-        <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'user-logout'%}"> Logout </a>
+        <a class="btn btn-info navbar-btn text-white" type="button"  href="{% url 'user-logout'%}"> Logout </a>
                                 
     </div>
 

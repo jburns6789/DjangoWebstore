@@ -18,13 +18,19 @@
 
     <body>
 
-        <br>
+        <div class="container bg-blue shadow-md p-5 form-layout col text-center">
 
-        <div class="container bg-blue shadow-md p-5 form-layout">
+            <h3> <i class="fa fa-list-alt"></i> &nbsp; Profile Management </h3>
+
+            <hr>
+
+        </div>
+
+        <div class="container bg-blue shadow-md p-5 form-layout col text-center">
 
             <h3> Update your Account </h3>
 
-            <br>
+            <hr>
 
             <form method="POST" autocompelte="off">
 
@@ -38,7 +44,7 @@
             
                 <br> <br>
 
-                <button type="submit" class="btn btn-secondary btn-lg w-100 btn-block p-2"> &nbsp; Update your Account </button>
+                <button type="submit" class="btn btn-info navbar-btn"> <i class="fa fa-magic"></i> &nbsp; Update your Account </button>
 
             </form>
 
@@ -46,12 +52,18 @@
         </div>
 
 
-        <div class="container bg-blue shadow-md p-5 form-layout">
+        <div class="container bg-blue shadow-md p-5 form-layout col text-center">
             <h3> Delete your Account </h3>
 
             <hr>
 
-            <a class="btn btn-alert navbar-btn text-white danger" type="button"  href="{% url 'delete-account'%}"> Delete your Account </a>
+            <a class="btn btn-warning navbar-btn text-white" type="button"  href="{% url 'delete-account'%}"> <i class="fa fa-times"></i> &nbsp; Delete your Account </a>
+
+        </div>
+
+        <div class="container bg-blue shadow-md p-5 form-layout col text-center">
+
+            <a class="btn btn-info navbar-btn text-white>" type="button" href="{% url 'dashboard' %}"> <i class="fa fa-backward"></i> &nbsp; Go Back </a>
 
         </div>
 
