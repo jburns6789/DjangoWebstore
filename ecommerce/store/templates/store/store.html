@@ -7,17 +7,18 @@
     <section class="py-4 text-center container">
         <div class="row py-lg-5">
             <div class ="col-lg-6 col-md-8 mx-auto">
-                <h4>Sugar Glow Product</h4>
+              <h4>Sugar Glow Product</h4>
 
-                <br>
+              <br>
 
-                <p class="lead text-muted">
+              <p class="lead text-muted">
                     Browse Content
-                </p>
+              </p>
 
-                <br>
+              <br>
 
-                <a href="{% url 'register' %}" class="btn btn-primary my-2">Create an Account</a>
+              <a href="{% url 'register' %}" class="btn btn-primary my-2"> <i class="fa fa-user"></i> &nbsp; Create an Account</a>
+
 
             </div>
 
@@ -27,11 +28,11 @@
 
        <!-- All products section -->
 
-        <div class="album py-5 bg-light">
+        <div class="album py-5 bg-transparent">
 
             <div class="container">
 
-              <div class="pb-3 h5"> All products </div>
+              <div class="pb-3 h5 text-center"> All products </div>
 
               <hr>
 
@@ -46,7 +47,7 @@
                         <img class="img-fluid" alt="Responsive Image" src="{{ product.image.url }}">
                         <div class="card-body">
                           <p class="card-text">
-                            <a class="text-info text-decoration-none" href="{{ product.get_absolute_url }}"> {{ product.title | capfirst }} </a>
+                            <a class="text-info text-white" href="{{ product.get_absolute_url }}"> {{ product.title | capfirst }} </a>
                           </p>
                           <div class="d-flex justify-content-between align-items-center">
                             <h5> {{ product.price }} </h5>

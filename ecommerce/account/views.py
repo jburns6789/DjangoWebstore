@@ -144,6 +144,8 @@ def profile_management(request):
 
     # Updating our username and email
 
+    user_form = UpdateUserForm(instance=request.user) # <----- django default validation
+
     if request.method == 'POST':
 
         user_form = UpdateUserForm(request.POST, instance=request.user)
@@ -160,8 +162,6 @@ def profile_management(request):
     context = {'user_form':user_form}
 
 
-
-    
     return render(request, 'account/profile-management.html', context=context)
 
 # Delete profile
