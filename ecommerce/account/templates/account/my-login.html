@@ -37,16 +37,24 @@
 
                 {{form.password|as_crispy_field}}
             
-                <br> <br>
+                <br>
+                <br>
 
                 <button type="submit" class="btn btn-secondary btn-lg w-100 btn-block p-2"> &nbsp; Login </button>
 
-                <br><br>
+                <br>
+                <br>
+
+                {{form.non_field_errors}}
+
+                <br>
+                <br>
 
                 
                 <a class="text-decoration-underline text-white" type="button"  href="{% url 'register' %}">Don't have an Account?</a>
 
-                <br><br>
+                <br>
+                <br>
 
                
                 <a class="text-decoration-underline text-white" type="button"  href="{% url 'reset_password' %}">Forgot your Password?</a>

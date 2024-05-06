@@ -153,6 +153,34 @@
 
     </nav>
 
+    <!-- django messages -->
+
+    {% for message in messages %}
+
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+
+            <h5 id="message-timer" class ="alert alert-success text-center"> {{message}} </h5>
+
+        {% endif %}
+
+
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+
+            <h5 id="message-timer" class ="alert alert-danger text-center"> {{message}} </h5>
+
+        {% endif %}
+
+
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+
+        <h5 id="message-timer" class ="alert alert-info text-center"> {{message}} </h5>
+
+        {% endif %}
+
+
+    {% endfor %}
+
+
     <body>
 
         {% block content %}
@@ -164,6 +192,10 @@
         {% endblock %}
 
     </body>
+
+
+    <script src="{% static 'js/app.js' %}"></script>
+
 
 </html>
 

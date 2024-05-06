@@ -15,6 +15,8 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib.auth.decorators import login_required
 
+from django.contrib import messages
+
 
 def register(request):
 
@@ -124,7 +126,27 @@ def my_login(request):
 
 def user_logout(request):
 
-    auth.logout(request)
+    # adding persisting cart session
+
+    try:
+
+        for key in list(request.session.keys()):
+
+            if key == 'session_key':
+
+                continue
+        
+        else:
+
+            del request.session[key]
+
+    except KeyError:
+
+        pass
+
+    messages.success(request, "Logout success!")
+    # were ever you redirect to that is where you must put the html template
+    # look at the base html at the bottom
 
     return redirect("store")
 
@@ -154,6 +176,8 @@ def profile_management(request):
 
             user_form.save()
 
+            messages.success(request, "Account updated")
+
             return redirect('dashboard')
         
 
@@ -173,11 +197,14 @@ def delete_account(request):
 
     user = User.objects.get(id=request.user.id)
 
+   
     if request.method == 'POST':
 
-       user.delete()
+        user.delete()
 
-       return redirect('dashboard')
+        messages.info(request, "Account deleted")
+
+        return redirect('store')
         
-
+    
     return render(request, 'account/delete-account.html')
