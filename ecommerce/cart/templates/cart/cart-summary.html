@@ -7,7 +7,7 @@
 
 <main class="pt-5">
     <div class="container">
-      <h1 class="h5"> Shopping cart </h1>
+      <h1 class="h5"> Shopping Cart </h1>
 	<hr>
 
   {% for item in cart %}
@@ -75,11 +75,18 @@
     {% endfor %}
 
       <div class="col-12 text-end">
+
         <div class="h6 fw-bold"> Sub total: $ <div id="total" class="d-inline-flex"> {{cart.get_total}} <!-- cart.get_total --> </div></div>
+
+        <br>
+
+        <a class="btn btn-info navbar-btn text-white" type="button"  href="{% url 'checkout'%}"> <i class="fa fa-credit-card-alt" aria-hidden="true"></i> &nbsp; Checkout </a>
+
       </div>
     </div>
     <br>
     <br>
+
  </main>
 
  <script>

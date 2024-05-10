@@ -23,10 +23,15 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', include('store.urls')), #store app
+
     path('cart/', include('cart.urls')), #Cart app
+
     path('account/', include('account.urls')), #Accounts app
 
+    path('payment/', include('payment.urls')), #Payment app
+    
     path("favicon.ico", RedirectView.as_view(url=staticfiles_storage.url("favicon.ico"))),
 
 ]

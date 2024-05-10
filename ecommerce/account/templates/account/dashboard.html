@@ -29,7 +29,7 @@
 
         <p> Track all of your orders here... </p>
 
-        <a class="btn btn-info navbar-btn text-white" type="button"  href="/"> My Orders </a>
+        <a class="btn btn-info navbar-btn text-white" type="button"  href="/"> <i class="fa fa-first-order" aria-hidden="true"></i> &nbsp; My Orders </a>
                                 
     </div>
 
@@ -41,18 +41,28 @@
 
         <p> Update or delete your account </p>
 
-        <a class="btn btn-info navbar-btn text-white" type="button"  href="{% url 'profile-management'%}"> Manage Account Here </a>
+        <a class="btn btn-info navbar-btn text-white" type="button"  href="{% url 'profile-management'%}"> <i class="fa fa-id-card" aria-hidden="true"></i> &nbsp; Manage Account Here </a>
                                 
     </div>
 
     <div class="container bg-blue shadow-md p-5 form-layout col text-center">
 
-        <a class="btn btn-info navbar-btn text-white" type="button"  href="{% url 'user-logout'%}"> Logout </a>
+        <h2>Update Shipping Address</h2>
+
+        <hr>
+
+        <a class="btn btn-info navbar-btn text-white" type="button"  href="{% url 'manage-shipping'%}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp; Change Shipping Address </a>
                                 
     </div>
 
+    <div class="container bg-blue shadow-md p-5 form-layout col text-center">
 
+        <a class="btn btn-info navbar-btn text-white" type="button"  href="{% url 'user-logout'%}"> <i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Logout </a>
+                                
+    </div>
 
+    <br>
+    
 </body>
 
 
