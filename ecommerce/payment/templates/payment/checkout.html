@@ -42,7 +42,7 @@
 
                     <div class="form-field">
                     
-                        <input class="form-control validate" id="name" type="text" placeholder="Full name*" autocomplete="off" value="" required>
+                        <input class="form-control validate" id="name" type="text" placeholder="Full name*" autocomplete="off" value="{{shipipng.full_name}}" required>
 
                     </div>
 
@@ -52,7 +52,7 @@
 
                     <div class="form-field">
 
-                        <input class="form-control validate" id="email" type="email" placeholder="Email address*" autocomplete="off" value="" required>
+                        <input class="form-control validate" id="email" type="email" placeholder="Email address*" autocomplete="off" value="{{shipipng.email}}" required>
 
                     </div>
 
@@ -62,7 +62,7 @@
                     
                     <div class="form-field">
 
-                        <input class="form-control validate" id="address1" type="text" placeholder="Address 1*" autocomplete="off" value="" required>
+                        <input class="form-control validate" id="address1" type="text" placeholder="Address 1*" autocomplete="off" value="{{shipipng.address1}}" required>
 
                     </div>
 
@@ -72,7 +72,7 @@
 
                     <div class="form-field">
 
-                        <input class="form-control validate" id="address2" type="text" placeholder="Address 2*" autocomplete="off" value="" required>
+                        <input class="form-control validate" id="address2" type="text" placeholder="Address 2*" autocomplete="off" value="{{shipipng.address2}}" required>
 
                     </div>
 
@@ -82,7 +82,7 @@
 
                     <div class="form-field">
 
-                        <input class="form-control validate" id="city" type="text" placeholder="City*" autocomplete="off" value="" required>
+                        <input class="form-control validate" id="city" type="text" placeholder="City*" autocomplete="off" value="{{shipipng.city}}" required>
 
                     </div>
 
@@ -92,7 +92,7 @@
 
                     <div class="form-field">
 
-                        <input class="form-control" id="state" type="text" placeholder="State (Optional)" autocomplete="off" value="" required>
+                        <input class="form-control" id="state" type="text" placeholder="State (Optional)" autocomplete="off" value="{{shipipng.state}}" required>
 
                     </div>
 
@@ -102,7 +102,7 @@
 
                     <div class="form-field">
 
-                        <input class="form-control" id="zipcode" type="text" placeholder="Zip code (Optional)" autocomplete="off" value="" required>
+                        <input class="form-control" id="zipcode" type="text" placeholder="Zip code (Optional)" autocomplete="off" value="{{shipipng.zipcode}}" required>
 
                     </div>
             
@@ -111,13 +111,10 @@
                 <br>
 
 
-
-               <button id="complete-order" type="submit" class="btn btn-primary navbar-btn text-white"> &nbsp; Complete order </button>
+                <button id="complete-order" type="submit" class="btn btn-primary navbar-btn text-white"> &nbsp; Complete Order </button>
                
 
                 <br>
-
-
 
 
             </form>
@@ -125,7 +122,6 @@
 
         </div>
 
-        
 
         <br>
 
@@ -133,10 +129,55 @@
     </body>
 
 
-    <!-- Ajax integration -->
-
 
     <script>
+
+        // Complete checkout
+        //click doesnt prompt any validator  
+        //use sumbit for form vaildation 
+
+        $(document).on('submit', function(e){
+
+            e.preventDefault();
+
+            $.ajax({
+
+                type:'POST',
+                url: '{% url "complete-order" %}',
+                data: {
+
+                    name: $('#name').val(), //<-- from the id tag in the form
+                    email: $('#email').val(),
+
+                    address1: $('#address1').val(),
+                    address2: $('#address2').val(),
+                    city: $('#city').val(),
+
+                    state: $('#state').val(),
+                    zipcode: $('#zipcode').val(),
+
+                    csrfmiddlewaretoken: "{{csrf_token}}",
+                    action: 'post'
+                },
+
+                success: function(json){
+                    //console.log(json)
+
+                    window.location.replace("{% url 'payment-success' %}")
+
+                
+
+                },
+
+                error: function(xhr, errmsg, err){
+
+                    window.location.replace("{% url 'payment-failed' %}")
+
+                }
+
+        });
+
+    })
 
 
    </script>

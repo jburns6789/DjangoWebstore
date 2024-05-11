@@ -8,13 +8,14 @@ from django.http import JsonResponse
 
 
 def cart_summary(request):
-    cart = Cart(request)
 
+    cart = Cart(request)
 
     return render(request, 'cart/cart-summary.html', {'cart':cart})
 
 
 def cart_add(request):
+
     cart = Cart(request)
 
     if request.POST.get('action') == 'post':
@@ -49,6 +50,7 @@ def cart_delete(request):
 
 
 def cart_update(request):
+    
     cart = Cart(request)
 
     if request.POST.get('action') == 'post':
