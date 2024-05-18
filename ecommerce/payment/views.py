@@ -20,6 +20,7 @@ def checkout(request):
 
             context = {'shipping':shipping_address}
 
+
             return render(request, 'payment/checkout.html', context=context)
         
         except:

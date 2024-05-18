@@ -26,7 +26,7 @@
         <!--<div class="container bg-white shadow-md p-5" style="width:500px; border-radius:20px;">-->
         <div class="container bg-blue shadow-md p-5 form-layout col text-center">
 
-            <form id="form">
+            <form id="form" onsubmit="event.preventDefault();">
 
                 <div>
 
@@ -92,7 +92,7 @@
 
                     <div class="form-field">
 
-                        <input class="form-control" id="state" type="text" placeholder="State (Optional)" autocomplete="off" value="{{shipipng.state}}" required>
+                        <input class="form-control" id="state" type="text" placeholder="State*" autocomplete="off" value="{{shipipng.state}}" required>
 
                     </div>
 
@@ -102,7 +102,7 @@
 
                     <div class="form-field">
 
-                        <input class="form-control" id="zipcode" type="text" placeholder="Zip code (Optional)" autocomplete="off" value="{{shipipng.zipcode}}" required>
+                        <input class="form-control" id="zipcode" type="text" placeholder="Zip code*" autocomplete="off" value="{{shipipng.zipcode}}" required>
 
                     </div>
             
@@ -110,21 +110,17 @@
 
                 <br>
 
+                <!--<button id="complete-order" type="submit" class="btn btn-primary navbar-btn text-white"> &nbsp; Complete Order </button>-->
 
-                <button id="complete-order" type="submit" class="btn btn-primary navbar-btn text-white"> &nbsp; Complete Order </button>
-               
+                <div id='paypal-button-container'></div>
 
-                <br>
-
+                <script src="https://www.paypal.com/sdk/js?client-id=AdRFSyJ29UApKW_20vNZ-vyU9rNMj4fWtctkCW6bNaYwPV28aYsPQlPPEZw-G6rnyI7mQM9ypMgP_d3n&currency=USD&intent=capture&enable-funding=venmo" data-sdk-integration-source="integrationbuilder"></script>
 
             </form>
 
-
         </div>
 
-
         <br>
-
 
     </body>
 
@@ -132,55 +128,258 @@
 
     <script>
 
-        // Complete checkout
-        //click doesnt prompt any validator  
-        //use sumbit for form vaildation 
+    //paypal integration
 
-        $(document).on('submit', function(e){
+    const paypalButtonsComponent = paypal.Buttons({
+        // optional styling for buttons
+        // https://developer.paypal.com/docs/checkout/standard/customize/buttons-style-guide/
+        style: {
+          color: "blue",
+          shape: "pill",
+          layout: "vertical",
+        },
 
-            e.preventDefault();
+        onInit: function(data, actions) {
 
-            $.ajax({
+            actions.disable();
 
-                type:'POST',
-                url: '{% url "complete-order" %}',
-                data: {
 
-                    name: $('#name').val(), //<-- from the id tag in the form
-                    email: $('#email').val(),
+            // Complete order - NO SHIPPING
+            
+            document.querySelectorAll('.validate').forEach(item => {
+                item.addEventListener('keyup', event => {
 
-                    address1: $('#address1').val(),
-                    address2: $('#address2').val(),
-                    city: $('#city').val(),
+                    //  The required fields are filled out
 
-                    state: $('#state').val(),
-                    zipcode: $('#zipcode').val(),
+                    var order_verified = 'Yes';
 
-                    csrfmiddlewaretoken: "{{csrf_token}}",
-                    action: 'post'
-                },
+                    function checkInputs(){
 
-                success: function(json){
-                    //console.log(json)
+                        $(':input[required]').each(function(){
 
-                    window.location.replace("{% url 'payment-success' %}")
+                            if($(this).val() == ''){
 
+
+                                // The required fields are empty
+
+                                return order_verified = 'No';
+
+
+                            }
+
+
+                        });
+
+
+                        return order_verified;
+
+
+                    }
+
+                    
+                    var isOrderVerified = checkInputs()
+
+
+                    if(isOrderVerified === 'Yes')
+                    {
+
+                        actions.enable();
+
+                    }
+
+                    else
+                    {
+
+                        actions.disable();
+
+                    }
+
+                });
+
+
+            });
+
+
+             // Complete order - WITH SHIPPING
+
+
+             //  The required fields are filled out
+            
+             var order_verified = 'Yes';
+
+             function checkInputs(){
+
+                 $(':input[required]').each(function(){
+
+                     if($(this).val() == ''){
+
+
+                         // The required fields are empty
+
+                        return order_verified = 'No';
+
+
+                    }
+
+                });
+
+                return order_verified;
+
+             }
+
+             var isOrderVerified = checkInputs()
+
+
+             if(isOrderVerified === 'Yes')
+             {
+
+                actions.enable();
+
+             }
+
+             else
+             {
+
+                actions.disable();
+
+             }
+
+                 
+
+
+        },
+
+
+
+        // set up the transaction
+        createOrder: (data, actions) => {
+            // pass in any options from the v2 orders create call:
+            // https://developer.paypal.com/api/orders/v2/#orders-create-request-body
+            const createOrderPayload = {
+                purchase_units: [
+                    {
+                        amount: {
+                            value: total_price
+                        }
+                    }
+                ]
+            };
+
+            return actions.order.create(createOrderPayload);
+        },
+
+
+
+
+        // finalize the transaction
+        onApprove: (data, actions) => {
+            const captureOrderHandler = (details) => {
+
+                const payerName = details.payer.name.given_name;
                 
+                console.log('Transaction completed');
 
-                },
 
-                error: function(xhr, errmsg, err){
+                // Ajax functionality
 
-                    window.location.replace("{% url 'payment-failed' %}")
+                $.ajax({
 
-                }
+                    type: 'POST',
+                    url: '{% url "complete-order" %}',
+                    data: {
+        
+                        name: $('#name').val(),
+                        email: $('#email').val(),
+        
+                        address1: $('#address1').val(),
+                        address2: $('#address2').val(),
+                        city: $('#city').val(),
+                        
+                        state: $('#state').val(),
+                        zipcode: $('#zipcode').val(),
+        
+        
+                        csrfmiddlewaretoken: "{{csrf_token}}",
+                        action: 'post'
+        
+                    },
+        
+                    success: function(json){
+        
+                        //console.log(json)
+        
+                        window.location.replace("{% url 'payment-success' %}");
+        
+        
+                    },
+        
+                    error: function(xhr, errmsg, err){
+        
+                        window.location.replace("{% url 'payment-failed' %}");
+        
+                    }
+        
+                });
 
+
+            };
+
+            return actions.order.capture().then(captureOrderHandler);
+        },
+
+
+
+        // handle unrecoverable errors
+        onError: (err) => {
+            console.error('An error prevented the buyer from checking out with PayPal');
+        }
+    });
+
+
+    paypalButtonsComponent
+        .render("#paypal-button-container")
+        .catch((err) => {
+            console.error('PayPal Buttons failed to render');
         });
 
-    })
 
 
-   </script>
+
+        
+
+    
+            
+
+    
+        
+
+
+
+        
+       
+
+
+
+
+
+
+        
+       
+
+
+
+
+
+            
+        
+
+                    
+    
+
+         
+
+
+    </script>
 
 
 {% endblock %}
