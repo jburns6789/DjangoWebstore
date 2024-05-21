@@ -65,7 +65,7 @@ def complete_order(request):
         email = request.POST.get('email')
 
         address1 = request.POST.get('address1')
-        address2 = request.POST.get('address2')
+        #address2 = request.POST.get('address2')
         city = request.POST.get('city')
 
         state = request.POST.get('state')
@@ -73,9 +73,9 @@ def complete_order(request):
 
         #style user shipping address / all in one address
 
-        shipping_address = (address1 + "\n" + address2 + "\n" +
+        shipping_address = (address1 + "\n" +
         
-        city + "\n" + state + "\n" + zipcode)
+        city + "\n" + state + "\n" + zipcode) #address2 +
         
         
     

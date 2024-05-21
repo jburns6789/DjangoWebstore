@@ -1,1 +1,30 @@
-<h1> Payment Failed </h1>
+{% include "store/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<body>
+
+    <br>
+
+    <div class="container bg-blue shadow-md p-5 form-layout">
+
+        <div class="text-center">
+            <i class="fa fa-exclamation" aria-hidden="true"></i>
+
+            <br><br>
+
+            <h5> <strong> Payment Failed! </h5>
+
+            <hr>
+
+            <p>Please contact support</p>
+        </div>
+
+
+    </div>
+
+</body>
+
+{% endblock %}

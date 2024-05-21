@@ -42,7 +42,7 @@
 
                     <div class="form-field">
                     
-                        <input class="form-control validate" id="name" type="text" placeholder="Full name*" autocomplete="off" value="{{shipipng.full_name}}" required>
+                        <input class="form-control validate" id="name" type="text" placeholder="Full name*" autocomplete="off" value="{{shipping.full_name}}" required>
 
                     </div>
 
@@ -52,7 +52,7 @@
 
                     <div class="form-field">
 
-                        <input class="form-control validate" id="email" type="email" placeholder="Email address*" autocomplete="off" value="{{shipipng.email}}" required>
+                        <input class="form-control validate" id="email" type="email" placeholder="Email address*" autocomplete="off" value="{{shipping.email}}" required>
 
                     </div>
 
@@ -62,7 +62,22 @@
                     
                     <div class="form-field">
 
-                        <input class="form-control validate" id="address1" type="text" placeholder="Address 1*" autocomplete="off" value="{{shipipng.address1}}" required>
+                        <input class="form-control validate" id="address1" type="text" placeholder="Address*" autocomplete="off" value="{{shipping.address1}}" required>
+
+                    </div>
+
+
+                    <br>
+
+                   <!--<div class="form-field">
+
+                        <input class="form-control validate" id="address2" type="text" placeholder="Address 2" autocomplete="off" value="{{shipipng.address2}}">
+
+                    </div>--> 
+
+                    <div class="form-field">
+
+                        <input class="form-control validate" id="city" type="text" placeholder="City*" autocomplete="off" value="{{shipping.city}}" required>
 
                     </div>
 
@@ -72,7 +87,7 @@
 
                     <div class="form-field">
 
-                        <input class="form-control validate" id="address2" type="text" placeholder="Address 2*" autocomplete="off" value="{{shipipng.address2}}" required>
+                        <input class="form-control validate" id="state" type="text" placeholder="State*" autocomplete="off" value="{{shipping.state}}" required>
 
                     </div>
 
@@ -82,27 +97,7 @@
 
                     <div class="form-field">
 
-                        <input class="form-control validate" id="city" type="text" placeholder="City*" autocomplete="off" value="{{shipipng.city}}" required>
-
-                    </div>
-
-
-                    <br>
-
-
-                    <div class="form-field">
-
-                        <input class="form-control" id="state" type="text" placeholder="State*" autocomplete="off" value="{{shipipng.state}}" required>
-
-                    </div>
-
-
-                    <br>
-
-
-                    <div class="form-field">
-
-                        <input class="form-control" id="zipcode" type="text" placeholder="Zip code*" autocomplete="off" value="{{shipipng.zipcode}}" required>
+                        <input class="form-control validate" id="zipcode" type="text" placeholder="Zip code*" autocomplete="off" value="{{shipping.zipcode}}" required>
 
                     </div>
             
@@ -127,6 +122,10 @@
 
 
     <script>
+
+    // Total price 
+
+    var total_price = '{{cart.get_total}}';
 
     //paypal integration
 
@@ -162,16 +161,20 @@
 
                                 // The required fields are empty
 
-                                return order_verified = 'No';
+                                console.log('Order verified returned No in :input[required] No Shipping ');
 
+                                return order_verified = 'No';
+                                
 
                             }
 
 
                         });
 
+                        console.log('Order verified status: No shipping order verified', order_verified);
 
                         return order_verified;
+                        
 
 
                     }
@@ -182,14 +185,14 @@
 
                     if(isOrderVerified === 'Yes')
                     {
-
+                        console.log('Order verified status:', order_verified);
                         actions.enable();
 
                     }
 
                     else
                     {
-
+                        console.log('Order disabled because isOrderVerified is === No');
                         actions.disable();
 
                     }
@@ -250,7 +253,6 @@
         },
 
 
-
         // set up the transaction
         createOrder: (data, actions) => {
             // pass in any options from the v2 orders create call:
@@ -267,7 +269,6 @@
 
             return actions.order.create(createOrderPayload);
         },
-
 
 
 
@@ -292,7 +293,7 @@
                         email: $('#email').val(),
         
                         address1: $('#address1').val(),
-                        address2: $('#address2').val(),
+                        //address2: $('#address2').val(),
                         city: $('#city').val(),
                         
                         state: $('#state').val(),
@@ -341,42 +342,6 @@
         .catch((err) => {
             console.error('PayPal Buttons failed to render');
         });
-
-
-
-
-        
-
-    
-            
-
-    
-        
-
-
-
-        
-       
-
-
-
-
-
-
-        
-       
-
-
-
-
-
-            
-        
-
-                    
-    
-
-         
 
 
     </script>
