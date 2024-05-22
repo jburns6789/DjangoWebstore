@@ -29,7 +29,7 @@
 
         <p> Track all of your orders here... </p>
 
-        <a class="btn btn-info navbar-btn text-white" type="button"  href="/"> <i class="fa fa-first-order" aria-hidden="true"></i> &nbsp; My Orders </a>
+        <a class="btn btn-info navbar-btn text-white" type="button"  href={% url 'track-orders' %}> <i class="fa fa-first-order" aria-hidden="true"></i> &nbsp; My Orders </a>
                                 
     </div>
 
@@ -41,7 +41,7 @@
 
         <p> Update or delete your account </p>
 
-        <a class="btn btn-info navbar-btn text-white" type="button"  href="{% url 'profile-management'%}"> <i class="fa fa-id-card" aria-hidden="true"></i> &nbsp; Manage Account Here </a>
+        <a class="btn btn-info navbar-btn text-white" type="button"  href="{% url 'profile-management' %}"> <i class="fa fa-id-card" aria-hidden="true"></i> &nbsp; Manage Account Here </a>
                                 
     </div>
 
