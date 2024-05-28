@@ -10,10 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from dotenv import load_dotenv
 import environ
 import os
 
 from pathlib import Path
+
+load_dotenv()
 
 env = environ.Env(
      DEBUG=(bool, False)
@@ -55,6 +58,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'account', # django app
     'crispy_forms',
+    'storages',
     
 ]
 
@@ -95,12 +99,12 @@ WSGI_APPLICATION = 'webstore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -160,3 +164,47 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER') #admin email
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
+
+# AWS credentials
+
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+
+# S3 configurations
+
+AWS_STORAGE_BUCKET_NAME = env('S3_BUCKET')
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+AWS_S3_FILE_OVERWRITE = False
+
+
+
+# Admin styling adjustment
+
+ADMIN_MEDIA_PREFIX = '/static/admin'
+
+
+# RDS (Database) configuration settings
+
+DATABASES = {
+
+    'default' : {
+        'ENGINE': 'django.db.backends.postgresql',
+
+        'NAME': env('AWS_DB_NAME'),
+
+        'USER': env('AWS_USER'),
+
+        'PASSWORD': env('AWS_PASSWORD'),
+
+        'HOST': env('AWS_ENDPOINT'),
+
+        'PORT': '5432',
+
+    }
+
+}
