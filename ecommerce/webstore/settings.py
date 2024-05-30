@@ -23,8 +23,6 @@ env = environ.Env(
 
 )
 
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,7 +38,9 @@ SECRET_KEY = secret_key = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['DjangoWebstore.us-east-2.elasticbeanstalk.com ']
+
+# CSRF_TRUSTED_ORIGINS = ['']
 
 # Application definition
 
@@ -189,6 +189,8 @@ ADMIN_MEDIA_PREFIX = '/static/admin'
 
 
 # RDS (Database) configuration settings
+
+# don't forget to create a new superuser
 
 DATABASES = {
 
