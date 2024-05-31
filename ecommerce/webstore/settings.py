@@ -38,9 +38,9 @@ SECRET_KEY = secret_key = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['DjangoWebstore.us-east-2.elasticbeanstalk.com ']
+ALLOWED_HOSTS = ['sugarglow.net', 'www.sugarglow.net']
 
-# CSRF_TRUSTED_ORIGINS = ['']
+CSRF_TRUSTED_ORIGINS = ['https://sugarglow.com', 'https://www.sugarglow.com']
 
 # Application definition
 
