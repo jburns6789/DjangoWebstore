@@ -2,6 +2,7 @@ asgiref==3.8.1
 boto3==1.34.113
 botocore==1.34.113
 Django==4.2.11
+django-allow-cidr==0.7.1
 django-crispy-forms==1.14.0
 django-environ==0.11.2
 django-mathfilters==1.0.0
