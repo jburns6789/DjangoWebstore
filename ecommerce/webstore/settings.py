@@ -42,6 +42,8 @@ ALLOWED_HOSTS = ['sugarglow.net', 'www.sugarglow.net']
 
 CSRF_TRUSTED_ORIGINS = ['https://sugarglow.com', 'https://www.sugarglow.com']
 
+ALLOWED_CIDR_NETS = ['172.17.0.0/16']
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -76,8 +78,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'webstore.urls'
-
-ALLOWED_CIDR_NETS = ['192.168.1.0/24']
 
 TEMPLATES = [
     {
