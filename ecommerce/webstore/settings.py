@@ -38,11 +38,11 @@ SECRET_KEY = secret_key = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['sugarglow.net', 'www.sugarglow.net']
+ALLOWED_HOSTS = ['sugarglow.net', 'www.sugarglow.net', '*']
 
 CSRF_TRUSTED_ORIGINS = ['https://sugarglow.com', 'https://www.sugarglow.com']
 
-ALLOWED_CIDR_NETS = ['172.17.0.0/16']
+ALLOWED_CIDR_NETS = ['192.168.1.0/24']
 
 # Application definition
 

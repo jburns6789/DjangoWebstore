@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 
 from django.conf import settings
 
-TAX_RATE = .0575
+# TAX_RATE = .0575
 
 
 
@@ -91,7 +91,7 @@ def complete_order(request):
 
     cart = Cart(request)
     
-    total_cost = cart.get_total() * TAX_RATE
+    total_cost = cart.get_total() # * TAX_RATE
 
     #Order Variations
     # 1 Create order -> Account users WITH + WITHOUT shipping information
@@ -143,17 +143,19 @@ def complete_order(request):
             price=item['price'])
 
             product_list.append(item['product'])
+            
+
 
         all_products = product_list
 
     
     # email order
             
-    send_mail('Order recieved', 'Hi! ' + '\n\n' + 'Thank you for placing your order' + '\n\n' +
-              
-           'View your order below' + '\n\n' + str(all_products) + '\n\n' + 'Total paid: $' +
+        send_mail('Order recieved', 'Hi! ' + '\n\n' + 'Thank you for placing your order' + '\n\n' +
+                
+            'View your order below' + '\n\n' + str(all_products) + '\n\n' + 'Total paid: $' +
 
-           str(cart.get_total()), settings.EMAIL_HOST_USER, [email], fail_silently=False,)
+            str(cart.get_total()), settings.EMAIL_HOST_USER, [email], fail_silently=False,)
               
                
         
